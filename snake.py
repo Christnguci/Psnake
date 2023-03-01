@@ -5,6 +5,7 @@ DOWN=270
 LEFT=180
 RIGHT=0
 MOVE=10
+#create initial snake
 class Snake(Turtle) :
     def __init__(self):
           super().__init__()
@@ -24,6 +25,12 @@ class Snake(Turtle) :
     def y_head(self):
          y=int(self.head.ycor())
          return y
+    #if snake catch food
+    def add(self):
+            new_segment =Turtle("square")
+            new_segment.color("white")
+            new_segment.penup()
+            self.segments.append(new_segment)
         
 
 
