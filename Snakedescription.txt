@@ -1,0 +1,9 @@
+Day20:
+-Creat a snake body: 
+-Move the snake
+-Control the snake
+Day21:
+-Detect collision with food
+-Create a scoreboard
+-Detect collision with wall
+-Detect collision with tail
