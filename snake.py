@@ -1,5 +1,5 @@
 from turtle import Turtle,colormode
-import random
+import random,math
 
 starting_positions=[(0,0),(-20,0),(-40,0)]
 UP= 90
@@ -40,9 +40,9 @@ class Snake(Turtle) :
             new_segment.color(random.randint(0,255),random.randint(0,255),random.randint(0,255))
             new_segment.penup()
             self.segments.append(new_segment)
-        
-
-
+    def distance(self,object):
+        x= int(math.sqrt((self.head.xcor()-object.xcor())*(self.head.xcor()-object.xcor())+(self.head.ycor()-object.ycor())*(self.head.ycor()-object.ycor())))
+        return x
 
 #movement
   

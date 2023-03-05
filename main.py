@@ -1,8 +1,7 @@
 from turtle import Turtle,Screen,colormode
-import time
+import time,math
 from snake import Snake
 from food import Food
-import math
 import tkinter as tk
 from tkinter import messagebox
 screen=Screen()
@@ -26,20 +25,18 @@ def Update_score (eat_times):
     font = ("Arial", 10,"normal")
     Score.write(f"Your score: {eat_times}",font=font)
     Score.hideturtle()
-def distance(snake,food):
-    x= int(math.sqrt((snake.x_head()-food.x_food())*(snake.x_head()-food.x_food())+(snake.y_head()-food.y_food())*(snake.y_head()-food.y_food())))
-    return x
 
-
-def deadth(snake):
-    x=int(math.sqrt((snake.x_head()*snake.x_head())))
-    y=int(math.sqrt((snake.y_head()*snake.y_head())))
+def deadth_wall(snake):
+    x=int(math.sqrt((snake.head.xcor()*snake.head.xcor())))
+    y=int(math.sqrt((snake.head.ycor()*snake.head.ycor())))
     if x>305 or y >305 :
         return True
     return False
-un_deadth=True
 
+
+un_deadth=True
 def Play_game():
+    gameover=False
     snake=create_a_snake()
     food=create_food()
     eat_times=0
@@ -51,9 +48,9 @@ def Play_game():
     keep_forward=True
     while keep_forward:
             screen.update()
-            time.sleep(0.07)
+            time.sleep(0.1)
             snake.move()  
-            if distance(snake,food)<15:
+            if snake.distance(food)<15:
                 food.move()
                 snake.add()
                 eat_times+=1
@@ -62,7 +59,12 @@ def Play_game():
                     food.shapesize(2)
                 else:
                     food.shapesize(1)
-            if deadth(snake):
+            for segment in snake.segments:
+                if segment==snake.head:
+                      pass
+                elif  snake.distance(segment) < 5:
+                        gameover=True
+            if deadth_wall(snake) or gameover:
                         # Create a Tkinter root window
                         root = tk.Tk()
 
@@ -80,7 +82,7 @@ def Play_game():
                     
 
 while un_deadth:
-        user_answer=messagebox.askokcancel("Continue ?"," Do you want to play the game ? ")
+        user_answer=messagebox.askyesno("Continue ?"," Do you want to play the game ? ")
         if user_answer:
             screen.listen()
             Play_game()
