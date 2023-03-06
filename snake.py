@@ -28,12 +28,6 @@ class Snake(Turtle) :
             new_segment.penup()
             new_segment.goto(position)
             self.segments.append(new_segment)
-    def x_head(self):
-         x= int(self.head.xcor())
-         return x
-    def y_head(self):
-         y=int(self.head.ycor())
-         return y
     #if snake catch food
     def add(self):
             new_segment =Turtle("square")
